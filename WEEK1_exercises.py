@@ -32,14 +32,33 @@ print ("Number of times bob occurs is: ",bob)
 # occur in alphabetical order. For example, if s = 'azcbobobegghakl', then 
 # your program should print
 # Longest substring in alphabetical order is: beggh
+# In the case of ties, print the first substring. For example, if s = 'abcbcd',
+# then your program should print
+# Longest substring in alphabetical order is: abc
+
+
+# define a dictionary of indices for each letter of the alphabet
 import string
 alpha_dict = dict(zip(string.ascii_lowercase,range(26)))
 
+# define a function that returns the largest alphabetical substring from the 
+# beginning of a string
+def return_largest_alphabetical_part(substr):
+    alphabet_value = 0
+    alphabetical_substr_part = ''
+    for letter in substr:
+        if alpha_dict[letter] < alphabet_value:
+            break
+        alphabetical_substr_part += letter
+        alphabet_value = alpha_dict[letter]
+    return alphabetical_substr_part
+
+# main function to progressively loop through different starting points of 
+# the overall string and call the above function iteratively
+longest_alphabetical_substring = ''
 counter = 0
-while counter < len(s):
-
-
-
-list1 = ['bo','beggh','akl']
-dict2 = dict(zip([len(x) for x in list1],list1))
-sorted(dict2.items(), key=lambda x:x[0], reverse = True)[0][1]
+while counter <= len(s):
+    if len(return_largest_alphabetical_part(s[counter:])) > len(longest_alphabetical_substring):
+        longest_alphabetical_substring = return_largest_alphabetical_part(s[counter:])
+    counter+= 1
+print ("Longest substring in alphabetical order is: ",longest_alphabetical_substring)
