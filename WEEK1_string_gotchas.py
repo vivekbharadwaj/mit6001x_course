@@ -39,3 +39,6 @@ str4[::-1]
 # 6) user input always returns string, even if the user inputs a number
 result = int(input("enter a number here: "))
 
+# 7) you can use lexicographic order to compare letters!
+'b'>'a'
+# True
